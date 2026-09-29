@@ -1,0 +1,237 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Emchive</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g1:#f3ead6;--g2:#f3e4e2;--grid:rgba(120,100,60,.07);--card:#fbf8f1;--ink:#1a1a17;--sh:#1a1a17;--mute:#77736a;--line:#d4ccb9;--yellow:#e6c84d;--pink:#e8a3c9;--blue:#a9bcdf;--green:#d4dbb0;--good:#3f6212;--bad:#9f1239;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--g1:#1c1913;--g2:#1f1a1c;--grid:rgba(255,240,200,.05);--card:#27231c;--ink:#f3ead6;--sh:#000;--mute:#aaa392;--line:#3d3829;--pink:#8e4d75;--blue:#4f6a9c;--green:#6b7a45;--good:#bef264;--bad:#fda4af}}
+:root[data-theme="dark"]{--g1:#1c1913;--g2:#1f1a1c;--grid:rgba(255,240,200,.05);--card:#27231c;--ink:#f3ead6;--sh:#000;--mute:#aaa392;--line:#3d3829;--pink:#8e4d75;--blue:#4f6a9c;--green:#6b7a45;--good:#bef264;--bad:#fda4af}
+*{box-sizing:border-box}html{background:linear-gradient(135deg,var(--g1),var(--g2)) fixed}
+body{margin:0;color:var(--ink);font:15px/1.5 'DM Sans',system-ui,sans-serif;background:linear-gradient(var(--grid) 1px,transparent 1px) 0 0/28px 28px,linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/28px 28px}
+h2,h3,.badge,.pill,.st,nav button,.tile,.cta,.chip,.micbtn{font-family:'Space Grotesk','DM Sans',sans-serif}
+h2,h3{font-weight:700;margin:0;letter-spacing:-.01em}
+#app{max-width:480px;margin:0 auto;min-height:100vh;padding:0 20px 120px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0 14px;border-bottom:1px solid var(--line)}
+.logo{font:700 20px 'DM Sans',sans-serif;letter-spacing:-.04em;text-transform:uppercase;display:flex;align-items:center;gap:8px}.logo i{font-style:normal}
+.logo:before{content:'';width:22px;height:22px;background:var(--ink);border-radius:50% 50% 50% 6px;box-shadow:inset 0 0 0 6px var(--ink),inset 0 0 0 9px var(--card)}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}button:focus-visible,textarea:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.pill,.badge,.st,.chip{border:1.5px solid var(--ink);border-radius:99px;background:var(--card);box-shadow:1px 2px 0 var(--sh);text-transform:uppercase;letter-spacing:.06em;font-weight:600;font-size:11.5px;padding:4px 12px;color:var(--ink)}
+.badge{display:inline-block}.pill{display:inline-flex;align-items:center}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);border:1px solid var(--ink);margin-right:8px}.off .dot{background:var(--card)}
+.hero{position:relative;isolation:isolate;text-align:center;padding:34px 0 8px}
+.hero:before{content:'';position:absolute;z-index:-1;right:2%;top:0;width:96px;height:120px;background:var(--green);opacity:.7;border-radius:60px 60px 0 0}
+.star{position:absolute;right:18px;top:20px;width:34px;height:34px;background:var(--yellow);clip-path:polygon(50% 0,60% 30%,90% 15%,72% 42%,100% 50%,72% 58%,90% 85%,60% 70%,50% 100%,40% 70%,10% 85%,28% 58%,0 50%,28% 42%,10% 15%,40% 30%)}
+.hero h1{font:700 38px/1.05 'DM Sans',sans-serif;letter-spacing:-.045em;margin:16px 0 10px}
+.sub{color:var(--mute);margin:0 auto;max-width:300px}
+.tiles{margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.tile{border:1.5px solid var(--ink);background:var(--card);border-radius:14px;padding:13px 4px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;box-shadow:0 4px 0 var(--sh);transition:transform .1s,box-shadow .1s}
+.tile.mic{background:var(--yellow);color:#1a1a17}.tile:active,.cta:active{transform:translateY(3px);box-shadow:0 1px 0 var(--sh)}
+.card{background:var(--card);border:1.5px solid var(--ink);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:2px 4px 0 var(--sh)}
+.tint{color:#1a1a17}.tint .mute{color:#3a372f}.tint .tag{color:#1a1a17;border-color:#1a1a17}.k1{background:var(--pink)}.k2{background:var(--blue)}.c-Training{background:var(--blue)}.c-Peerfeedback{background:var(--pink)}.c-Lessonoutcome{background:var(--green)}.c-Classroomreflection{border-top:6px solid var(--yellow)}
+.sec{display:flex;justify-content:space-between;align-items:baseline;margin:30px 0 12px}.sec h2{font-size:21px}.sec button{font:600 11.5px 'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--ink)}
+.row{display:flex;align-items:center;gap:10px}.grow{flex:1;min-width:0}
+.mute{color:var(--mute);font-size:13px}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:0 7px;font-size:12px;color:var(--mute);margin:4px 4px 0 0}.tag.c{color:var(--ink);border-color:var(--ink);background:var(--yellow);color:#1a1a17}
+.st{box-shadow:none;white-space:nowrap;padding:2px 9px;font-size:10.5px}
+.s-Improving,.s-Strong{background:var(--green);color:#1a1a17}.s-NeedsSupport{background:var(--pink);color:#1a1a17}.s-Developing,.s-Stable{background:var(--blue);color:#1a1a17}.s-NeedsEvidence{background:var(--card)}
+hr{border:0!important;border-top:1px dashed var(--line)!important}
+.bar{height:9px;border:1.5px solid var(--ink);background:var(--card);border-radius:9px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:var(--yellow);border-right:1.5px solid var(--ink)}
+.cta{background:var(--ink);color:var(--card);border:1.5px solid var(--ink);border-radius:12px;padding:10px 16px;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.05em;box-shadow:0 3px 0 var(--sh)}.cta.alt{background:var(--card);color:var(--ink)}
+.next{border-top:6px solid var(--yellow)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid .card{margin:0;text-align:left}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1.5px solid var(--ink);padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px))}
+nav div{max-width:480px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);align-items:center}
+nav button{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:600;color:var(--mute);padding:10px 0}nav .on{color:var(--ink);border-bottom:2px solid var(--yellow)}
+nav .fab{background:var(--yellow);color:#1a1a17;border:1.5px solid var(--ink);width:48px;height:48px;border-radius:50%;margin:-22px auto 0;font-size:26px;line-height:1;padding:0;box-shadow:0 4px 0 var(--sh)}
+.tl{position:relative;padding-left:20px;border-left:1.5px dashed var(--ink);margin-left:6px}.tl .card{position:relative}.tl .card:nth-child(odd){transform:rotate(-.3deg)}.tl .card:nth-child(even){transform:rotate(.3deg)}
+.tl .card:before{content:'';position:absolute;left:-29px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--yellow);border:1.5px solid var(--ink)}.tl .card.q:before{background:var(--card)}
+.sheetbg{position:fixed;inset:0;background:rgba(26,26,23,.45);display:flex;align-items:flex-end;justify-content:center;z-index:9}
+.sheet{background:var(--g1);width:100%;max-width:480px;max-height:92vh;overflow:auto;border:1.5px solid var(--ink);border-bottom:0;border-radius:26px 26px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));animation:up .2s}
+@keyframes up{from{transform:translateY(24px);opacity:0}}
+textarea{width:100%;min-height:110px;border:1.5px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink);padding:12px;font:inherit;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.chip{box-shadow:none;color:var(--mute)}.chip.on{background:var(--ink);color:var(--card)}
+.micbtn{width:100%;border:1.5px solid var(--ink);border-radius:14px;padding:14px;background:var(--yellow);color:#1a1a17;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin:12px 0 6px;box-shadow:0 4px 0 var(--sh)}.micbtn.rec{background:var(--pink)}
+.step{display:flex;align-items:center;gap:10px;padding:6px 0;color:var(--mute)}.step:before{content:'';width:11px;height:11px;border-radius:50%;border:1.5px solid var(--ink);background:var(--card)}.step.done{color:var(--ink)}.step.done:before{background:var(--yellow)}.step.act:before{background:var(--pink)}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:10px 16px;border-radius:12px;z-index:20;font-size:14px;max-width:90%;box-shadow:0 3px 0 var(--sh)}
+.banner{border:1.5px dashed var(--ink);background:var(--yellow);color:#1a1a17;border-radius:14px;padding:10px 12px;margin:10px 0;font-weight:500}
+.sig{width:9px;height:9px;border:1.5px solid var(--ink);border-radius:50%;display:inline-block;margin-right:6px}
+img.th{width:100%;max-height:150px;object-fit:cover;border:1.5px solid var(--ink);border-radius:12px;margin-top:8px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.tl .card{transform:none!important}}
+</style></head><body><div id="app"></div><div id="layer"></div>
+<script>
+const $=s=>document.querySelector(s),DAY=864e5;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const COMPS={num:['Foundational Numeracy',''],lit:['Foundational Literacy',''],plan:['Lesson Planning',''],mgmt:['Classroom Management',''],diff:['Differentiated Instruction',''],asmt:['Assessment','']};
+const TOPICS=[
+['regroup','Regrouping','num',/regroup|borrow|carry ?over/i,'Mathematics'],['subtract','Subtraction','num',/subtract|take away/i,'Mathematics'],
+['add','Addition','num',/\baddition\b|\badding\b|\badd\b/i,'Mathematics'],['numline','Number line','num',/number ?line/i,'Mathematics'],
+['place','Place value','num',/place value|tens and ones/i,'Mathematics'],['mult','Multiplication','num',/multipl|times table/i,'Mathematics'],
+['phonics','Phonics','lit',/phonic|letter sound|blend|\bb and d\b/i,'Language'],['fluency','Reading fluency','lit',/fluen|paired reading|read aloud|reading/i,'Language'],
+['vocab','Vocabulary','lit',/vocab|new words|word wall/i,'Language'],['compre','Comprehension','lit',/comprehen|story questions/i,'Language'],
+['plan','Lesson planning','plan',/lesson plan|learning objective|sequenc|planned/i,''],
+['engage','Engagement & routines','mgmt',/noisy|noise|attention|engag|routine|discipline|distract/i,''],
+['mixed','Mixed-level teaching','diff',/mixed[- ]level|different levels|two[- ]level|group [ab]\b|finish early|adapted/i,''],
+['quiz','Quick assessment','asmt',/quiz|\btest\b|assess|exit ticket|check gaps/i,'']];
+const NEG=/struggl|confus|difficult|\bhard\b|\blost\b|noisy|failed|couldn'?t|could not|not understand|mistake|weak/i,POS=/understood|understand|worked|improv|confident|engaged|success|great|\bwell\b|easily|got it|enjoy|\bgood\b/i;
+const NUMW={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12};
+const CONC=/stick|object|block|bead|bundle|counter|pebble|physical/i;
+let uid=0;
+function analyze(text,src,ts){
+ const t=text.replace(/\s+/g,' ').trim(),g=t.match(/(?:grade|class|std)\s*(\d)/i),hits=[],topics=[];let subj='',w=0,s=0,pos=0,neg=0;
+ TOPICS.forEach(([k,l,c,re,sb])=>{const m=t.match(re);if(m){topics.push({k,l,c});hits.push({l,p:m[0]});if(!subj&&sb)subj=sb}});
+ t.split(/[.;,!?]|\bbut\b/i).forEach(cl=>{const N=NEG.test(cl),P=!N&&POS.test(cl);if(!N&&!P)return;
+  const m=cl.match(/\b(\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\b/i),n=m&&/student|kid|child|learner|pupil/i.test(cl)?(+m[1]||NUMW[m[1].toLowerCase()]):0;
+  if(n){N?s+=n:w+=n}else{N?neg++:pos++}});
+ const cl=x=>Math.max(-1,Math.min(1,x)),tot=w+s,sent=cl((pos-neg)/2);
+ const sig=tot?(w-s)/(tot+4)*.7+sent*.3:sent*.8;
+ let type=src&&src!=='auto'?src:/mentor|feedback|observed|suggested/i.test(t)?'Peer feedback':/attended|workshop|training/i.test(t)?'Training':/quiz|result|score|out of|\btest\b/i.test(t)?'Lesson outcome':'Classroom reflection';
+ const sr=type==='Training'||type==='Peer feedback';
+ return{id:'e'+Date.now()+(uid++),ts:ts||Date.now(),text:t,type,grade:g?+g[1]:null,subject:subj,topics,comps:[...new Set(topics.map(x=>x.c))],hits,sig:+sig.toFixed(2),w,s,concrete:CONC.test(t)&&!sr,lang:/[\u0900-\u097F]/.test(t)?'Hindi':'English'}}
+function assess(cid){
+ const L=D.evidence.filter(e=>e.comps.includes(cid)).sort((a,b)=>a.ts-b.ts),n=L.length,P=L.filter(e=>!(e.type==='Training'&&!e.sig));
+ const avg=P.length?P.reduce((a,e)=>a+e.sig,0)/P.length:0;let slope=0;
+ if(P.length>=3){const m=(P.length-1)/2;let a=0,d=0;P.forEach((e,i)=>{a+=(i-m)*(e.sig-avg);d+=(i-m)**2});slope=a/d*(P.length-1)}
+ const traj=P.length<3?'Too early':slope>.3?'Improving':slope<-.3?'Declining':'Steady';
+ const status=n<2?'Needs Evidence':traj==='Improving'?'Improving':traj==='Declining'||avg<-.2?'Needs Support':avg>=.5?'Strong':n<4?'Developing':'Stable';
+ const gc={},win={};L.forEach(e=>e.topics.filter(t=>t.c===cid).forEach(t=>{if(e.s>0||e.sig<-.1)gc[t.k]=(gc[t.k]||0)+1;if(e.sig>.2)win[t.k]=(win[t.k]||0)+1}));
+ const ord=k=>TOPICS.findIndex(t=>t[0]===k),gap=Object.keys(gc).filter(k=>k!=='numline').sort((a,b)=>gc[b]-gc[a]||ord(a)-ord(b))[0]||null;
+ const types=new Set(L.map(e=>e.type)),indep=types.has('Peer feedback')||types.has('Lesson outcome'),fresh=n&&Date.now()-L[n-1].ts<14*DAY;
+ const cs=Math.min(n/6,1)*.6+Math.min(types.size/3,1)*.3+(fresh?.1:.04);
+ let conf=n<2?'Low':cs>=.7&&indep?'High':cs>=.45?'Medium':'Low';
+ const tried=L.some(e=>e.concrete&&e.topics.some(t=>t.k===gap));
+ return{cid,L,n,avg,traj,status,gc,gap,win:Object.keys(win).sort((a,b)=>win[b]-win[a]),conf,types:types.size,indep,tried}}
+const label=k=>TOPICS.find(t=>t[0]===k)[1];
+const REC={
+regroup:tr=>tr?['Fade from objects to drawings','Keep the sticks, then move to drawn tens-and-ones sketches before the number line. Pair the students still stuck with a peer who can explain it, then record what happens.']:['Try a concrete-object regrouping activity','Before the number line, let students bundle sticks into tens and trade one ten for ten ones. Record how many understand afterwards.'],
+subtract:()=>['Model subtraction with objects first','Use counters to take away and compare, then link to the number line. Record the outcome.'],
+phonics:()=>['Run a 10-minute letter-sound game','Use cards to contrast similar letters (b/d) with the students who confuse them. Record how many blend correctly.'],
+fluency:()=>['Extend paired reading','Pair fluent and developing readers for 10 minutes daily and record progress after a week.'],
+mixed:()=>['Design a two-level activity','Prepare one task with an easier and a harder version, save the worksheet as a resource, and record the result.'],
+engage:()=>['Try a 30-second attention routine','Use a call-and-response signal at every transition and note how engagement changes.'],
+quiz:()=>['Turn quiz results into a re-teach group','Group students by the mistakes you saw, re-teach one gap for 10 minutes, and record who improved.']};
+function recFor(a){
+ const nm=COMPS[a.cid][0];
+ if(a.n<2)return{t:`Capture evidence for ${nm}`,a:`Record a short reflection on ${nm.toLowerCase()} so Emchive can assess it reliably.`,why:`Cannot determine competency trajectory yet. Only ${a.n} relevant evidence record${a.n===1?' is':'s are'} available (2 needed for a status, 3 for a trend).`,ev:a.L,cid:a.cid};
+ if(!a.gap)return{t:`Keep building ${nm}`,a:'Record one more classroom application to confirm your progress.',why:`No repeated struggles found across ${a.n} records for ${nm}.`,ev:a.L,cid:a.cid};
+ const r=(REC[a.gap]||(()=>['Try one new technique','Pick a technique from your training, use it in class and record the outcome.']))(a.tried),c=a.gc[a.gap];
+ return{t:r[0],a:r[1],cid:a.cid,ev:a.L.filter(e=>e.topics.some(t=>t.k===a.gap)),
+ why:`You recorded ${c} classroom experience${c>1?'s':''} involving ${label(a.gap).toLowerCase()} where students struggled. `+(a.tried?'You have already tested a concrete-object strategy and the latest result was encouraging, but some students still struggled.':'You have not yet recorded an alternative strategy being tested.')}}
+function topRec(){
+ const all=Object.keys(COMPS).map(assess),g=all.filter(a=>a.gap).sort((a,b)=>b.gc[b.gap]-a.gc[a.gap]||b.n-a.n);
+ return g.length?recFor(g[0]):recFor(all.sort((a,b)=>a.n-b.n)[0])}
+/* ---------- storage ---------- */
+let mem=null;
+const SEEDS=[[28,'Attended the FLN numeracy workshop at the block resource centre. Learned about the number line and using concrete objects for subtraction.','Training'],
+[24,'Grade 3 phonics: used letter sound cards in a group. Most students blended words well but three students still confuse b and d.'],
+[21,'Tried the number line for subtraction with Grade 3. Five students understood it immediately, but seven students struggled with regrouping.'],
+[17,'My class has mixed levels. Some kids finish early and others are lost. Hard to manage the noise and keep everyone engaged.'],
+[14,'Mentor feedback: the number line is good for visuals, but try physical objects like sticks before the number line for regrouping.','Peer feedback'],
+[10,'Ran a quick quiz on Grade 3 subtraction to check gaps. Most students did well but two students still struggled with borrowing.'],
+[7,'Grade 2 reading fluency: paired reading worked well, students were engaged and confident.'],
+[4,'Used a two-level worksheet for Grade 3 addition: easier for group A, word problems for group B. Everyone stayed engaged.'],
+[2,'Tried bundles of sticks for regrouping. Six students understood, only two still struggled. Result improved.']];
+const seed=()=>({evidence:SEEDS.map(([d,t,ty])=>analyze(t,ty,Date.now()-d*DAY)),queue:[],online:true,lang:'en-IN'});
+function load(){try{const r=localStorage.getItem('emchive.v1');if(r)return JSON.parse(r)}catch(e){}return mem||seed()}
+function persist(){try{localStorage.setItem('emchive.v1',JSON.stringify(D))}catch(e){mem=D}}
+let D=load();const S={view:'home',cid:null,src:'auto',thumb:null,step:-1,res:null,sheet:null};
+/* ---------- helpers ---------- */
+const ago=ts=>{const d=Math.floor((Date.now()-ts)/DAY);return d<1?'Today':d===1?'Yesterday':d<7?d+'d ago':new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'short'})};
+const stc=s=>'s-'+s.replace(/ /g,'');
+const stPill=s=>`<span class="st ${stc(s)}">${s}</span>`;
+const arrow=t=>t==='Improving'?'Improving':t==='Declining'?'Declining':t==='Steady'?'Steady':'Too early';
+function spark(a,w=90,h=28){let r=0,pts=a.L.map((e,i)=>{r+=e.sig;return r/(i+1)});if(pts.length<2)return`<svg width="${w}" height="${h}"><line x1="0" y1="${h/2}" x2="${w}" y2="${h/2}" stroke="var(--line)" stroke-width="2" stroke-dasharray="4 4"/></svg>`;
+ const p=pts.map((v,i)=>`${(i/(pts.length-1)*(w-6)+3).toFixed(1)},${(h/2-v*(h/2-4)).toFixed(1)}`).join(' ');return`<svg width="${w}" height="${h}"><polyline points="${p}" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`}
+function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+/* ---------- views ---------- */
+function evCard(e,q){const sc=e.sig>.15?'var(--good)':e.sig<-.15?'var(--bad)':'var(--mute)';
+ return`<div class="card ${q?'q':'c-'+e.type.replace(/ /g,'')+(e.type!=='Classroom reflection'?' tint':'')}"><div class="row mute"><span class="grow">${q?'Saved on device · waiting to sync':ago(e.ts)+' · '+esc(e.type)}</span>${q?'':`<span><i class="sig" style="background:${sc}"></i>${e.sig>.15?'Going well':e.sig<-.15?'Struggle':'Neutral'}</span>`}</div>
+ <p style="margin:6px 0">${esc(e.text)}</p>${e.thumb?`<img class="th" src="${e.thumb}" alt="Attached photo">`:''}
+ ${q?'':`${e.grade?`<span class="tag">Grade ${e.grade}</span>`:''}${e.subject?`<span class="tag">${e.subject}</span>`:''}${e.topics.map(t=>`<span class="tag">${t.l}</span>`).join('')}${e.comps.map(c=>`<span class="tag c">${COMPS[c][0]}</span>`).join('')}`}</div>`}
+function home(){
+ const r=topRec(),wk=D.evidence.filter(e=>Date.now()-e.ts<7*DAY).length;
+ return`<div class="hero"><span class="badge">Namaste, Priya</span><span class="star"></span><h1>What happened in class today?</h1><p class="sub">Capture it in a minute. Emchive turns it into evidence of your growth.</p>
+ <div class="tiles"><button class="tile mic" data-act="cap" data-t="voice">Record</button><button class="tile" data-act="cap" data-t="photo">Photo</button><button class="tile" data-act="cap" data-t="text">Write</button><button class="tile" data-act="cap" data-t="link">Link</button></div></div>
+ <div class="card next"><div class="mute">Your next development action</div><h3 style="margin:4px 0">${esc(r.t)}</h3><p style="margin:0 0 12px">${esc(r.a)}</p>
+ <div class="row"><button class="cta" data-act="tried">I tried this</button><button class="cta alt" data-act="why" data-c="top">Why am I seeing this?</button></div></div>
+ <div class="sec"><h2>Your growth</h2><button data-act="nav" data-v="grow">See all</button></div>
+ <div class="card">${Object.keys(COMPS).map(c=>{const a=assess(c);return`<button data-act="comp" data-c="${c}" style="width:100%;text-align:left;padding:7px 0"><div class="row"><span class="grow">${COMPS[c][0]}</span>${stPill(a.status)}</div><div class="bar"><i style="width:${Math.min(a.n/8,1)*100}%"></i></div></button>`}).join('')}</div>
+ <div class="row mute" style="justify-content:space-around"><span><b>${D.evidence.length}</b> evidence records</span><span><b>${wk}</b> this week</span><span><b>${D.queue.length}</b> waiting to sync</span></div>
+ <p class="mute" style="text-align:center;margin-top:18px"><button data-act="reset" style="text-decoration:underline">Reset demo data</button></p>`}
+function timeline(){const items=[...D.queue.map(q=>evCard(q,1)),...[...D.evidence].sort((a,b)=>b.ts-a.ts).map(e=>evCard(e))];
+ return`<div class="sec"><h2>Evidence timeline</h2><span class="mute">${D.evidence.length} records</span></div>${items.length?`<div class="tl">${items.join('')}</div>`:'<div class="card">No evidence yet. Tap the + button and record your first classroom reflection.</div>'}`}
+function growth(){return`<div class="sec"><h2>Competency growth</h2></div><div class="grid">${Object.keys(COMPS).map((c,i)=>{const a=assess(c);return`<button class="card ${i%3?'tint k'+(i%3):''}" data-act="comp" data-c="${c}"><div style="font-weight:700;margin:4px 0">${COMPS[c][0]}</div>${stPill(a.status)}<div class="mute" style="margin-top:8px">${arrow(a.traj)}</div>${spark(a)}<div class="mute">${a.n} record${a.n===1?'':'s'} · ${a.conf} confidence</div></button>`}).join('')}</div>`}
+function detail(c){const a=assess(c),r=recFor(a),span=a.n?`${ago(a.L[0].ts)} to ${ago(a.L[a.n-1].ts)}`:'No records';
+ return`<button data-act="nav" data-v="grow" class="mute" style="padding:4px 0">‹ All competencies</button><div class="sec" style="margin-top:4px"><h2>${COMPS[c][0]}</h2>${stPill(a.status)}</div>
+ ${a.n<2?`<div class="banner">Cannot determine competency trajectory yet. Only ${a.n} relevant evidence record${a.n===1?' is':'s are'} available.</div>`:''}
+ <div class="card"><div class="row"><div class="grow"><div class="mute">Trajectory</div><b>${arrow(a.traj)}</b></div><div>${spark(a,120,40)}</div></div><hr style="border:0;border-top:1px solid var(--line);margin:12px 0">
+ <div class="grid" style="grid-template-columns:1fr 1fr 1fr"><div><div class="mute">Evidence</div><b>${a.n}</b></div><div><div class="mute">Confidence</div><b>${a.conf}</b></div><div><div class="mute">Period</div><b style="font-size:12px">${span}</b></div></div></div>
+ ${a.win.length?`<div class="card"><div class="mute">Strengths</div>${a.win.map(k=>`<span class="tag">${label(k)}</span>`).join('')}</div>`:''}
+ ${a.gap?`<div class="card"><div class="mute">Development area</div><b>${label(a.gap)}</b> · students struggled in ${a.gc[a.gap]} record${a.gc[a.gap]>1?'s':''}</div>`:''}
+ <div class="card next"><div class="mute">Recommended next action</div><h3 style="margin:4px 0">${esc(r.t)}</h3><p style="margin:0 0 12px">${esc(r.a)}</p><div class="row"><button class="cta" data-act="tried" data-c="${c}">I tried this</button><button class="cta alt" data-act="why" data-c="${c}">Why?</button></div></div>
+ <div class="sec"><h2>Supporting evidence</h2></div>${a.n?[...a.L].reverse().map(e=>evCard(e)).join(''):'<div class="card mute">Nothing recorded for this competency yet.</div>'}`}
+function render(){const v=S.view,m=v==='home'?home():v==='time'?timeline():v==='grow'?growth():detail(S.cid),nb=(k,i,l)=>`<button data-act="nav" data-v="${k}" class="${v===k||(k==='grow'&&v==='comp')?'on':''}">${l}</button>`;
+ $('#app').innerHTML=`<header><div class="logo">Emchive</div><button class="pill ${D.online?'':'off'}" data-act="net"><span class="dot"></span>${D.online?'Online':'Offline'}${D.queue.length?' · '+D.queue.length+' queued':''}</button></header><main>${m}</main><nav><div>${nb('home','','Home')}${nb('time','','Timeline')}<button class="fab" data-act="cap" data-t="voice" aria-label="New capture">+</button>${nb('grow','','Growth')}</div></nav>`}
+/* ---------- sheets ---------- */
+const STEPS=['Transcribing your note','Detecting language','Extracting grade, subject and topic','Mapping to competencies','Updating your growth profile'];
+let rec=null;
+function sheet(html){$('#layer').innerHTML=`<div class="sheetbg" data-act="bg"><div class="sheet" role="dialog">${html}</div></div>`}
+function closeSheet(){if(rec)rec.stop();$('#layer').innerHTML='';S.sheet=null}
+function capSheet(t,pre){S.src='auto';S.thumb=null;S.sheet='cap';
+ const ph={voice:'Tap the mic and speak, or type here…',text:'What did you try in class today? What worked, and who struggled?',photo:'Add a note about this photo…',link:'Paste a link and add why it is useful…'}[t];
+ sheet(`<div class="row"><h2 class="grow">New evidence</h2><button data-act="close" class="pill">Close</button></div>
+ <button class="micbtn" id="mic" data-act="mic" aria-label="Record voice note">Start recording</button><div class="mute" id="mst" >Tap to record · ${D.lang==='hi-IN'?'Hindi':'English'}</div>
+ <div class="chips"><button class="chip ${D.lang==='en-IN'?'on':''}" data-act="lang" data-l="en-IN">English</button><button class="chip ${D.lang==='hi-IN'?'on':''}" data-act="lang" data-l="hi-IN">हिन्दी</button></div>
+ <textarea id="ta" placeholder="${ph}">${esc(pre||'')}</textarea>
+ ${t==='photo'?`<input type="file" id="ph" accept="image/*" capture="environment" style="margin-top:8px"><div id="pv"></div>`:''}
+ <div class="chips" id="srcs">${['auto|Auto-detect','Classroom reflection|Reflection','Training|Training','Peer feedback|Mentor feedback','Lesson outcome|Outcome'].map(x=>{const[v,l]=x.split('|');return`<button class="chip ${v==='auto'?'on':''}" data-act="src" data-v="${v}">${l}</button>`}).join('')}</div>
+ <div class="row"><button class="cta grow" data-act="save">Save and analyze</button><button class="cta alt" data-act="ex">Use example</button></div>`);
+ if(t==='voice'&&!pre)setTimeout(()=>{},0);
+ const p=$('#ph');if(p)p.onchange=()=>{const f=p.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),k=Math.min(1,320/im.width);c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.thumb=c.toDataURL('image/jpeg',.6);$('#pv').innerHTML=`<img class="th" src="${S.thumb}" alt="Preview">`};im.src=r.result};r.readAsDataURL(f)}}
+function mic(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition,ta=$('#ta'),b=$('#mic');
+ if(rec){rec.stop();return}
+ if(!SR){toast('Voice input is not supported in this browser. Type your note instead.');return}
+ try{const base=ta.value;rec=new SR();rec.lang=D.lang;rec.interimResults=true;rec.continuous=true;
+ rec.onresult=e=>{let t='';for(const r of e.results)t+=r[0].transcript;ta.value=(base?base+' ':'')+t};
+ rec.onerror=e=>toast('Microphone unavailable ('+e.error+'). Type your note instead.');
+ rec.onend=()=>{rec=null;const b=$('#mic');if(b){b.classList.remove('rec');b.textContent='Start recording';$('#mst').textContent='Stopped. Review the text, then save.'}};
+ rec.start();b.classList.add('rec');b.textContent='Stop recording';$('#mst').textContent='Listening… tap to stop'}catch(e){rec=null;toast('Could not start the microphone.')}}
+async function processItem(it,ui){
+ const before=Object.fromEntries(Object.keys(COMPS).map(c=>[c,assess(c).status]));
+ if(ui)for(let i=0;i<STEPS.length;i++){S.step=i;stepsView();await new Promise(r=>setTimeout(r,420))}
+ const ev=analyze(it.text,it.src,it.ts);ev.thumb=it.thumb;D.evidence.push(ev);D.queue=D.queue.filter(q=>q.id!==it.id);persist();
+ return{ev,before}}
+function stepsView(){sheet(`<h2>Analyzing your note</h2><p class="mute">Saved on your device. Now understanding it.</p>${STEPS.map((s,i)=>`<div class="step ${i<S.step?'done':i===S.step?'act':''}">${s}</div>`).join('')}`)}
+function resultView(ev,before){const cs=ev.comps;
+ sheet(`<h2>Evidence saved</h2><div style="margin:10px 0">${ev.grade?`<span class="tag">Grade ${ev.grade}</span>`:''}${ev.subject?`<span class="tag">${ev.subject}</span>`:''}${ev.topics.map(t=>`<span class="tag">${t.l}</span>`).join('')}<span class="tag">${esc(ev.type)}</span><span class="tag">${ev.lang}</span></div>
+ ${cs.length?cs.map(c=>{const a=assess(c);return`<div class="card"><div class="row"><span class="grow"><b>${COMPS[c][0]}</b></span>${stPill(a.status)}</div><div class="mute">${before[c]!==a.status?before[c]+' to '+a.status+' · ':''}${a.n} evidence · ${a.conf} confidence</div></div>`}).join(''):'<div class="banner">No competency could be matched. Try adding what you taught and how students responded.</div>'}
+ <div class="card"><b>Why this mapping?</b><p class="mute" style="margin:4px 0 0">${ev.hits.length?ev.hits.map(h=>`"${esc(h.p)}" maps to ${h.l}`).join(' · '):'No teaching topics detected.'}${ev.w+ev.s?` Students who did well: ${ev.w}, who struggled: ${ev.s}.`:''}</p></div>
+ <div class="row"><button class="cta grow" data-act="grow">See my growth</button><button class="cta alt" data-act="close">Done</button></div>`)}
+function whySheet(c){const a=assess(c==='top'?topRec().cid:c),r=recFor(a);
+ sheet(`<div class="row"><h2 class="grow">Why am I seeing this?</h2><button data-act="close" class="pill">Close</button></div><div class="card next" style="margin-top:12px"><b>${esc(r.t)}</b><p style="margin:6px 0 0">${esc(r.why)}</p></div>
+ <div class="card"><b>How sure is Emchive?</b><p class="mute" style="margin:4px 0 0">${a.conf} confidence: ${a.n} record${a.n===1?'':'s'}, ${a.types} source type${a.types===1?'':'s'}${a.indep?', including independent feedback or outcomes':', all self-reported'}. Confidence rises with more records, more varied sources and recent practice.</p></div>
+ <div class="sec"><h2>Evidence used</h2></div>${r.ev.length?r.ev.slice(-4).map(e=>evCard(e)).join(''):'<div class="card mute">No evidence yet.</div>'}`)}
+/* ---------- events ---------- */
+async function syncQueue(){const q=[...D.queue];if(!q.length)return;for(const it of q)await processItem(it,false);toast(`Synced ${q.length} note${q.length>1?'s':''} and updated your profile`);render()}
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,d=b.dataset;
+ if(a==='bg'){if(e.target===b)closeSheet();return}
+ if(a==='nav'){S.view=d.v;render();scrollTo(0,0)}
+ else if(a==='comp'){S.view='comp';S.cid=d.c;render();scrollTo(0,0)}
+ else if(a==='cap')capSheet(d.t);
+ else if(a==='tried'){const r=d.c?recFor(assess(d.c)):topRec();capSheet('text',`Today I tried: ${r.t.toLowerCase()}. `)}
+ else if(a==='why')whySheet(d.c);
+ else if(a==='close')closeSheet();
+ else if(a==='grow'){closeSheet();S.view='grow';render()}
+ else if(a==='mic')mic();
+ else if(a==='lang'){D.lang=d.l;persist();document.querySelectorAll('[data-act=lang]').forEach(x=>x.classList.toggle('on',x.dataset.l===d.l));$('#mst').textContent='Language set. Tap the mic to record.'}
+ else if(a==='src'){S.src=d.v;document.querySelectorAll('[data-act=src]').forEach(x=>x.classList.toggle('on',x===b))}
+ else if(a==='ex')$('#ta').value='Today I used a number line to teach subtraction to Grade 3. Most students understood it, but four students still struggled with regrouping.';
+ else if(a==='net'){D.online=!D.online;persist();render();toast(D.online?'Back online. Syncing…':'Offline mode. Notes will be saved on this device.');if(D.online)syncQueue()}
+ else if(a==='reset'){D=seed();persist();render();toast('Demo data restored')}
+ else if(a==='save'){const t=$('#ta').value.trim();if(!t&&!S.thumb){toast('Add a voice note, text or photo first.');return}
+  if(rec)rec.stop();const it={id:'q'+Date.now(),ts:Date.now(),text:t||'Photo note',src:S.src,thumb:S.thumb};D.queue.push(it);persist();
+  if(!D.online){closeSheet();render();toast('Saved on this device. It will be analyzed when you are online.');return}
+  const {ev,before}=await processItem(it,true);render();resultView(ev,before)}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+window.addEventListener('online',()=>{if(!D.online){D.online=true;render();syncQueue()}});
+render();
+</script></body></html>
